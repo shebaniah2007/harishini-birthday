@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  overflow-x: hidden;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+h1, h2 {
+  color: #ff3f6c;
+  margin-bottom: 15px;
+}
+
+p {
+  color: #333;
+  line-height: 1.6;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 30px;
+  background: #ff3f6c;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e6375d;
+}
+
+/* Photos */
+.photos img {
+  width: 100%;
+  border-radius: 18px;
+  margin-bottom: 15px;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Video */
+video {
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
+/* Heart */
+.heart {
+  font-size: 40px;
+  margin-top: 15px;
+}
+
+/* Music hidden */
+audio {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio autoplay loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="card">
+    <h1 class="hero-text">
+  🎉 Happy Birthday <span id="name"></span> 💖
+</h1>
+    <p class="hero-sub">
+      To the girl who makes life brighter, louder, and happier ✨  
+      Today is all about YOU.
+    </p>
+  </div>
+</section>
+
+<!-- VIDEO SECTION -->
+<section id="video">
+  <div class="card">
+    <h2>🎥 A Little Surprise</h2>
+    <p>A moment just for you 😌</p>
+
+    <!-- Replace video.mp4 -->
+    <video src="video.mp4" muted autoplay loop></video>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section id="photos">
+  <div class="card photos">
+    <h2>📸 Beautiful Memories</h2>
+
+    <!-- Replace images -->
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+
+    <p>Every picture = a smile 💕</p>
+  </div>
+</section>
+
+<!-- QUESTIONS -->
+<section id="fun">
+  <div class="card">
+    <h2>😜 Quick Questions</h2>
+
+    <p>Who is the most amazing person today?</p>
+    <button onclick="reveal('YOU, obviously 😎💖')">Reveal</button>
+
+    <p>How special are you?</p>
+    <button onclick="reveal('So special the world paused today ✨')">Reveal</button>
+
+    <p>Are you loved?</p>
+    <button onclick="reveal('More than you’ll ever know 💕')">Reveal</button>
+
+    <div class="heart">❤️</div>
+  </div>
+</section>
+
+<!-- MESSAGE -->
+<section id="end">
+  <div class="card">
+    <h2>💌 From Me</h2>
+    <p>
+      Thank you for being my best friend.  
+      For the laughs, tears, madness, and love.  
+      I’m grateful for you every single day.
+    </p>
+    <h2>🎂 Happy Birthday ✨</h2>
+  </div>
+</section>
+
+<script>
+/* GSAP INIT */
+gsap.registerPlugin(ScrollTrigger);
+
+/* HERO ANIMATION */
+gsap.from(".hero-text", {
+  y: -50,
+  opacity: 0,
+  duration: 1.2,
+  ease: "bounce.out"
+});
+
+gsap.from(".hero-sub", {
+  y: 30,
+  opacity: 0,
+  duration: 1,
+  delay: 0.4
+});
+
+/* VIDEO TRANSITION */
+gsap.from("#video .card", {
+  scrollTrigger: {
+    trigger: "#video",
+    start: "top 80%"
+  },
+  scale: 0.7,
+  opacity: 0,
+  duration: 1.2,
+  ease: "power4.out"
+});
+
+/* PHOTOS ANIMATION */
+gsap.utils.toArray(".photos img").forEach((img, i) => {
+  gsap.to(img, {
+    scrollTrigger: {
+      trigger: img,
+      start: "top 85%"
+    },
+    opacity: 1,
+    scale: 1,
+    duration: 0.8,
+    delay: i * 0.2,
+    ease: "power2.out"
+  });
+});
+
+/* FUN SECTION */
+gsap.from("#fun .card", {
+  scrollTrigger: {
+    trigger: "#fun",
+    start: "top 80%"
+  },
+  y: 80,
+  opacity: 0,
+  duration: 1
+});
+
+/* HEART PULSE */
+gsap.to(".heart", {
+  scale: 1.3,
+  repeat: -1,
+  yoyo: true,
+  duration: 0.8,
+  ease: "power1.inOut"
+});
+
+/* END MESSAGE */
+gsap.from("#end .card", {
+  scrollTrigger: {
+    trigger: "#end",
+    start: "top 80%"
+  },
+  rotateY: 90,
+  opacity: 0,
+  duration: 1.2,
+  ease: "power3.out"
+});
+
+/* FUN ALERT */
+function reveal(msg) {
+  gsap.fromTo("body", {scale:1}, {
+    scale:1.02,
+    yoyo:true,
+    repeat:1,
+    duration:0.15
+  });
+  alert(msg);
+}
+const nameText = "Harishini";
+let i = 0;
+
+function typeName() {
+  if (i < nameText.length) {
+    document.getElementById("name").textContent += nameText.charAt(i);
+    i++;
+    setTimeout(typeName, 150);
+  }
+}
+
+typeName();
+
+</script>
+
+</body>
+</html>
