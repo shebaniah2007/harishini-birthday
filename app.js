@@ -1,3 +1,5 @@
+alert("JS is working");
+
 document.addEventListener("DOMContentLoaded", () => {
   const playBtn = document.getElementById("playBtn");
   const music = document.getElementById("bgMusic");
